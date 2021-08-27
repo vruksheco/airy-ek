@@ -3,3 +3,10 @@ appVersion: "1.0"
 description: A Helm chart for Airy Core
 name: airy
 version: 0-develop
+dependencies:
+  - name: ingress-controller
+    condition: ingress-controller.enabled
+  - name: prerequisites
+    condition: prerequisites.enabled
+  - name: tools
+    condition: tools.enabled

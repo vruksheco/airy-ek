@@ -3,3 +3,8 @@ appVersion: "1.0"
 description: Optional tools for Airy Core
 name: tools
 version: 1.0
+dependencies:
+  - name: akhq
+    condition: akhq.enabled
+  - name: kafka-connect
+    condition: kafka-connect.enabled
