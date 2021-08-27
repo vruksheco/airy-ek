@@ -29,7 +29,6 @@ cd helm-repo
 helm package ../infrastructure/helm-chart/ --version "${version}"
 helm package ../infrastructure/helm-chart/charts/prerequisites/charts/kafka/
 helm package ../infrastructure/helm-chart/charts/prerequisites/charts/beanstalkd/
-helm package ../infrastructure/helm-chart/charts/core/ --version "${version}"
 helm package ../infrastructure/helm-chart/charts/ingress-controller/ --version "${version}"
 helm package ../infrastructure/helm-chart/charts/tools/charts/akhq/
 helm package ../infrastructure/helm-chart/charts/tools/charts/kafka-connect/

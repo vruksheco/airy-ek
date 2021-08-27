@@ -1,3 +1,4 @@
 global:
+  containerRegistry: ghcr.io/airyhq
   kubernetes:
     host: "airy.core"

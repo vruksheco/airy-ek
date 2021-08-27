@@ -1,11 +1,8 @@
 package workspace
 
 type KubernetesConf struct {
-	AppImageTag       string `yaml:"appImageTag"`
-	ContainerRegistry string `yaml:"containerRegistry"`
-	Namespace         string `yaml:"namespace"`
-	NgrokEnabled      bool   `yaml:"ngrokEnabled"`
-	Host              string `yaml:"host"`
+	NgrokEnabled bool   `yaml:"ngrokEnabled"`
+	Host         string `yaml:"host"`
 }
 
 type IngressConf struct {

@@ -1,7 +1,4 @@
 kubernetes:
-  appImageTag: {{ .Version }}
-  containerRegistry: ghcr.io/airyhq
-  namespace: {{ .Namespace }}
   ngrokEnabled: {{ default false .NgrokEnabled }}
 {{- if .Host }}
   host: {{ default "airy.core" .Host }}
