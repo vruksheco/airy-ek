@@ -97,19 +97,14 @@ func getCmd(args ...string) *exec.Cmd {
 	return exec.Command(minikube, append(defaultArgs, args...)...)
 }
 
-func (p *provider) PostInstallation(providerConfig map[string]string, dir workspace.ConfigDir) error {
-	conf, err := dir.LoadAiryYaml()
-	if err != nil {
-		return err
-	}
-
+func (p *provider) PostInstallation(providerConfig map[string]string, namespace string, dir workspace.ConfigDir) error {
 	clientset, err := p.context.GetClientSet()
 	if err != nil {
 		return err
 	}
 
-	configMaps := clientset.CoreV1().ConfigMaps(conf.Kubernetes.Namespace)
-	configMap, err := configMaps.Get(context.TODO(), "hostnames", metav1.GetOptions{})
+	configMaps := clientset.CoreV1().ConfigMaps(namespace)
+	configMap, err := configMaps.Get(context.TODO(), "core-config", metav1.GetOptions{})
 	if err != nil {
 		return err
 	}

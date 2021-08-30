@@ -1,22 +1,6 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: hostnames
-  namespace: {{ .Values.global.kubernetes.namespace }}
-data:
-  {{ if .Values.global.ingress }}
-   {{ if .Values.global.ingress.https }}
-  HOST: https://{{ .Values.global.kubernetes.host }}
-   {{ else }}
-  HOST: http://{{ .Values.global.kubernetes.host }}
-   {{ end }}
-  {{ else }}
-  HOST: http://{{ .Values.global.kubernetes.host }}
-  {{ end }}
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
   name: security
   namespace: {{ .Values.global.kubernetes.namespace }}
 data:
@@ -25,3 +9,22 @@ data:
   {{- end }}
   jwtSecret: {{ .Values.global.security.jwtSecret | quote }}
   allowedOrigins: {{ .Values.global.security.allowedOrigins | quote }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: core-config
+  namespace: {{ .Values.global.kubernetes.namespace }}
+data:
+  APP_IMAGE_TAG: {{ .Values.global.kubernetes.appImageTag }}
+  CORE_ID: {{ randAlphaNum 10 | lower }}
+  CHATPLUGIN_JWT_SECRET: {{ randAlphaNum 128 | quote }}
+  {{ if .Values.global.ingress }}
+   {{ if .Values.global.ingress.https }}
+  API_HOST: https://{{ .Values.global.kubernetes.host }}
+   {{ else }}
+  API_HOST: http://{{ .Values.global.kubernetes.host }}
+   {{ end }}
+  {{ else }}
+  API_HOST: http://{{ .Values.global.kubernetes.host }}
+  {{ end }}

@@ -94,19 +94,19 @@ func create(cmd *cobra.Command, args []string) {
 		console.Exit("installing Helm charts failed with err: ", err)
 	}
 
-	if err = provider.PostInstallation(providerConfig, dir); err != nil {
+	if err = provider.PostInstallation(providerConfig, namespace, dir); err != nil {
 		console.Exit("failed to run post installation hook: ", err)
 	}
 
 	fmt.Println("🎉 Your Airy Core is ready")
 
-	hosts, err := kube.GetHosts(clientset, namespace)
+	coreConfig, err := kube.GetCmData("core-config", namespace, clientset)
 	if err != nil {
 		console.Exit("failed to get hosts from installation")
 	}
 
 	fmt.Println("\t 👩‍🍳 Available hosts:")
-	for hostName, host := range hosts {
+	for hostName, host := range coreConfig {
 		fmt.Printf("\t\t %s:\t %s", explainHost(hostName), host)
 		fmt.Println()
 	}
@@ -129,6 +129,8 @@ func create(cmd *cobra.Command, args []string) {
 func explainHost(hostName string) string {
 	switch hostName {
 	case "HOST":
+		return "host"
+	case "API_HOST":
 		return "api"
 	case "NGROK":
 		return "ngrok"

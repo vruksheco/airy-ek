@@ -199,10 +199,10 @@ kubectl -n kube-system annotate service traefik "service.beta.kubernetes.io/aws-
 kubectl -n kube-system patch service traefik --patch '{"spec": { "ports": [ { "name": "https", "port": 443, "protocol": "TCP", "targetPort": 80 } ] } }'
 ```
 
-Update the `hostnames` configMap with the new https endpoint:
+Update the `core-config` configMap with the new https endpoint:
 
 ```sh
-kubectl patch configmap hostnames --patch "{\"data\": { \"HOST\": \"https://${HOSTNAME}\"} }"
+kubectl patch configmap core-config --patch "{\"data\": { \"HOST\": \"https://${HOSTNAME}\"} }"
 ```
 
 Update the existing ingress resources with the new hostname (for this you will additionally require the [jq](https://stedolan.github.io/jq/download/) utility):

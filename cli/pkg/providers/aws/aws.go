@@ -49,13 +49,8 @@ func (p *provider) GetOverrides() tmpl.Variables {
 	}
 }
 
-func (p *provider) PostInstallation(providerConfig map[string]string, dir workspace.ConfigDir) error {
+func (p *provider) PostInstallation(providerConfig map[string]string, namespace string, dir workspace.ConfigDir) error {
 	if providerConfig["hostUpdate"] != "false" {
-		conf, err := dir.LoadAiryYaml()
-		if err != nil {
-			return err
-		}
-
 		clientset, err := p.context.GetClientSet()
 		if err != nil {
 			return err
@@ -68,17 +63,17 @@ func (p *provider) PostInstallation(providerConfig map[string]string, dir worksp
 
 		loadBalancerUrl := ingressService.Status.LoadBalancer.Ingress[0].Hostname
 
-		if err = p.updateIngress("airy-core", loadBalancerUrl, conf.Kubernetes.Namespace); err != nil {
+		if err = p.updateIngress("airy-core", loadBalancerUrl, namespace); err != nil {
 			return err
 		}
-		if err = p.updateIngress("airy-core-ui", loadBalancerUrl, conf.Kubernetes.Namespace); err != nil {
+		if err = p.updateIngress("airy-core-ui", loadBalancerUrl, namespace); err != nil {
 			return err
 		}
-		if err = p.updateIngress("airy-core-redirect", loadBalancerUrl, conf.Kubernetes.Namespace); err != nil {
+		if err = p.updateIngress("airy-core-redirect", loadBalancerUrl, namespace); err != nil {
 			return err
 		}
 
-		if err = p.updateHostsConfigMap(loadBalancerUrl, conf.Kubernetes.Namespace); err != nil {
+		if err = p.updateHostsConfigMap(loadBalancerUrl, namespace); err != nil {
 			return err
 		}
 
@@ -521,12 +516,12 @@ func (p *provider) updateHostsConfigMap(loadBalancerUrl string, namespace string
 	}
 
 	configMaps := clientset.CoreV1().ConfigMaps(namespace)
-	configMap, err := configMaps.Get(context.TODO(), "hostnames", metav1.GetOptions{})
+	configMap, err := configMaps.Get(context.TODO(), "core-config", metav1.GetOptions{})
 	if err != nil {
 		return err
 	}
 
-	configMap.Data["HOST"] = "http://" + loadBalancerUrl
+	configMap.Data["API_HOST"] = "http://" + loadBalancerUrl
 	_, err = configMaps.Update(context.TODO(), configMap, metav1.UpdateOptions{})
 
 	return err

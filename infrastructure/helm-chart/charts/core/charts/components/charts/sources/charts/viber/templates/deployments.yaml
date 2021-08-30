@@ -32,7 +32,7 @@ spec:
             - configMapRef:
                 name: security
             - configMapRef:
-                name: hostnames
+                name: core-config
           env:
             - name: KAFKA_BROKERS
               valueFrom:
