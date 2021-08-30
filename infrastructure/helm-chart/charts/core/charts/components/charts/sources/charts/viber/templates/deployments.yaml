@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sources-viber-connector
-  namespace: {{ .Values.global.kubernetes.namespace }}
   labels:
     app: sources-viber-connector
     type: sources
@@ -89,7 +88,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sources-viber-events-router
-  namespace: {{ .Values.global.kubernetes.namespace }}
   labels:
     app: sources-viber-events-router
     type: sources

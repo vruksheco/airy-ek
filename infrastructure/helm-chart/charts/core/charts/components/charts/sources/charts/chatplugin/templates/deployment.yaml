@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sources-chatplugin
-  namespace: {{ .Values.global.kubernetes.namespace }}
   labels:
     app: sources-chatplugin
     type: sources

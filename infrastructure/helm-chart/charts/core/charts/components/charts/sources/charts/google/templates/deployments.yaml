@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sources-google-connector
-  namespace: {{ .Values.global.kubernetes.namespace }}
   labels:
     app: sources-google-connector
     type: sources
@@ -92,7 +91,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sources-google-events-router
-  namespace: {{ .Values.global.kubernetes.namespace }}
   labels:
     app: sources-google-events-router
     type: sources

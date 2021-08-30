@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: airy-controller
-  namespace: {{ .Values.global.kubernetes.namespace }}
   labels:
     app: airy-controller
 spec:

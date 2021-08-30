@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sources-facebook-connector
-  namespace: {{ .Values.global.kubernetes.namespace }}
   labels:
     app: sources-facebook-connector
     type: sources
@@ -97,7 +96,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sources-facebook-events-router
-  namespace: {{ .Values.global.kubernetes.namespace }}
   labels:
     app: sources-facebook-events-router
     type: sources

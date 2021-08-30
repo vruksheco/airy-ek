@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sources-twilio-connector
-  namespace: {{ .Values.global.kubernetes.namespace }}
   labels:
     app: sources-twilio-connector
     type: sources
@@ -92,7 +91,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sources-twilio-events-router
-  namespace: {{ .Values.global.kubernetes.namespace }}
   labels:
     app: sources-twilio-events-router
     type: sources

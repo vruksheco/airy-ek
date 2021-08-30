@@ -3,7 +3,6 @@ kind: Ingress
 apiVersion: networking.k8s.io/v1
 metadata:
   name: 'airy-core'
-  namespace: {{ .Values.global.kubernetes.namespace }}
 spec:
   rules:
     - host: {{ .Values.global.kubernetes.host }}

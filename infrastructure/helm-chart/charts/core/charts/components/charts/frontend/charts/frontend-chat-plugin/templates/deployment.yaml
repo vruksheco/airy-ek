@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend-chat-plugin
-  namespace: {{ .Values.global.kubernetes.namespace }}
   labels:
     app: frontend-chat-plugin
     type: frontend

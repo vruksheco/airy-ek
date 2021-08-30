@@ -4,7 +4,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: upgrade-{{ .Values.global.kubernetes.appImageTag }}
-  namespace: {{ .Values.global.kubernetes.namespace }}
   annotations:
     "helm.sh/hook": "pre-upgrade"
     "helm.sh/hook-weight": "1"
@@ -50,7 +49,6 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ .Values.global.kubernetes.appImageTag }}-cleanup-upgrade
-  namespace: {{ .Values.global.kubernetes.namespace }}
   annotations:
     "helm.sh/hook": "pre-upgrade"
     "helm.sh/hook-weight": "0"
@@ -80,7 +78,6 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ .Values.global.kubernetes.appImageTag }}-upgrade-api-communication
-  namespace: {{ .Values.global.kubernetes.namespace }}
   annotations:
     "helm.sh/hook": "pre-upgrade"
     "helm.sh/hook-weight": "9"
@@ -147,7 +144,6 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ .Values.global.kubernetes.appImageTag }}-upgrade-integration-webhooks
-  namespace: {{ .Values.global.kubernetes.namespace }}
   annotations:
     "helm.sh/hook": "pre-upgrade"
     "helm.sh/hook-weight": "10"
@@ -290,7 +286,6 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ .Values.global.kubernetes.appImageTag }}-post-upgrade
-  namespace: {{ .Values.global.kubernetes.namespace }}
   annotations:
     "helm.sh/hook": "post-upgrade"
     "helm.sh/hook-weight": "10"

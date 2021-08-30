@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webhook-consumer
-  namespace: {{ .Values.global.kubernetes.namespace }}
   labels:
     app: webhook-consumer
     type: webhook
@@ -94,7 +93,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webhook-publisher
-  namespace: {{ .Values.global.kubernetes.namespace }}
   labels:
     app: webhook-publisher
     type: webhook
