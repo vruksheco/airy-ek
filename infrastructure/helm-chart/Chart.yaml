@@ -4,8 +4,8 @@ description: A Helm chart for Airy Core
 name: airy
 version: 0-develop
 dependencies:
-  - name: ingress-controller
-    condition: ingress-controller.enabled
+  - name: ingress
+    condition: ingress.enabled
   - name: prerequisites
     condition: prerequisites.enabled
   - name: tools

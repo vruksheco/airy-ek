@@ -1,0 +1,10 @@
+global:
+  kubernetes:
+    host: "http://airy.core"
+    loadbalancerAnnotations: {}
+api:
+  admin:
+    component: api-admin
+    image: api/admin
+    mandatory: true
+    enabled: true

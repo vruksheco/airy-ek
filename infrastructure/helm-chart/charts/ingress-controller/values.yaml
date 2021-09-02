@@ -1,5 +1,0 @@
-global:
-  ingress:
-    https: false
-    loadbalancerAnnotations: {}
-    letsencryptEmail:

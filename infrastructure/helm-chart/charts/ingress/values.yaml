@@ -1,0 +1,6 @@
+https: false
+loadbalancerAnnotations: {}
+letsencryptEmail:
+host: http://airy.core
+apiHost: http://airy.core
+ngrokEnabled: false

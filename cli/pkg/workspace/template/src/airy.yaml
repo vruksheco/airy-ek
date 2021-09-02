@@ -1,20 +1,20 @@
-kubernetes:
-  ngrokEnabled: {{ default false .NgrokEnabled }}
+global:
+  kubernetes:
 {{- if .Host }}
-  host: {{ default "airy.core" .Host }}
+    host: {{ default "airy.core" .Host }}
 {{- end }}
+  security:
+    allowedOrigins: '*'
+    jwtSecret: {{ randAlphaNum 128 }}
 ingress:
+  ngrokEnabled: {{ default false .NgrokEnabled }}
   https: {{ default false .Https}}
+{{- if .LetsencryptEmail }}
   letsencryptEmail: {{ .LetsencryptEmail}}
+{{- end }}
   {{- if .LoadbalancerAnnotations }}
   loadbalancerAnnotations:
   {{- range $k, $v := .LoadbalancerAnnotations }}
     {{ $k }}: {{ $v }}
   {{- end }}
   {{- end }}
-security:
-  allowedOrigins: '*'
-  jwtSecret: {{ randAlphaNum 128 }}
-components:
-  sources:
-  integration:

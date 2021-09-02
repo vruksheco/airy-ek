@@ -1,11 +1,11 @@
 package workspace
 
 type KubernetesConf struct {
-	NgrokEnabled bool   `yaml:"ngrokEnabled"`
-	Host         string `yaml:"host"`
+	Host string `yaml:"host"`
 }
 
 type IngressConf struct {
+	NgrokEnabled            bool              `yaml:"ngrokEnabled"`
 	Https                   bool              `yaml:"https,omitempty"`
 	LetsencryptEmail        string            `yaml:"letsencryptEmail,omitempty"`
 	LoadbalancerAnnotations map[string]string `yaml:"loadbalancerAnnotations,omitempty"`
