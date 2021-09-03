@@ -1,7 +1,7 @@
 global:
-  kubernetes:
-    containerRegistry: ghcr.io/airyhq
-    host: "airy.core"
+  containerRegistry: ghcr.io/airyhq
+ingress:
+  host: "airy.core"
 config:
   kafka:
     brokers: "kafka-headless:9092"

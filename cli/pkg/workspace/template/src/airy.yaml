@@ -1,12 +1,10 @@
-global:
-  kubernetes:
-{{- if .Host }}
-    host: {{ default "airy.core" .Host }}
-{{- end }}
-  security:
-    allowedOrigins: '*'
-    jwtSecret: {{ randAlphaNum 128 }}
+security:
+  allowedOrigins: '*'
+  jwtSecret: {{ randAlphaNum 128 }}
 ingress:
+{{- if .Host }}
+  host: {{ default "airy.core" .Host }}
+{{- end }}
   ngrokEnabled: {{ default false .NgrokEnabled }}
   https: {{ default false .Https}}
 {{- if .LetsencryptEmail }}

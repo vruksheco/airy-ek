@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: "{{ .Values.global.kubernetes.containerRegistry}}/{{ .Values.image }}:{{ .Values.global.kubernetes.appImageTag }}"
+          image: "{{ .Values.global.containerRegistry}}/{{ .Values.image }}:{{ .Values.global.appImageTag }}"
           imagePullPolicy: Always
           envFrom:
             - configMapRef:

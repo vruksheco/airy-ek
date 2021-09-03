@@ -23,7 +23,7 @@ spec:
       automountServiceAccountToken: true
       containers:
       - name: app
-        image: "{{ .Values.global.kubernetes.containerRegistry}}/infrastructure/controller:{{ .Values.global.kubernetes.appImageTag }}"
+        image: "{{ .Values.global.containerRegistry}}/infrastructure/controller:{{ .Values.global.appImageTag }}"
         imagePullPolicy: Always
         env:
         - name: LABEL_SELECTOR

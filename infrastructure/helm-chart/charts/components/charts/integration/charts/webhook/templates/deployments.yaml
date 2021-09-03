@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: "{{ .Values.global.kubernetes.containerRegistry}}/{{ .Values.consumer.image }}:{{ .Values.global.kubernetes.appImageTag }}"
+        image: "{{ .Values.global.containerRegistry}}/{{ .Values.consumer.image }}:{{ .Values.global.appImageTag }}"
         imagePullPolicy: Always
         env:
         - name: BEANSTALK_HOSTNAME
@@ -116,7 +116,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: "{{ .Values.global.kubernetes.containerRegistry}}/{{ .Values.publisher.image }}:{{ .Values.global.kubernetes.appImageTag }}"
+        image: "{{ .Values.global.containerRegistry}}/{{ .Values.publisher.image }}:{{ .Values.global.appImageTag }}"
         imagePullPolicy: Always
         env:
         - name: KAFKA_BROKERS
