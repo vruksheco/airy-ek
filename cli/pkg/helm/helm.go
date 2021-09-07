@@ -207,3 +207,12 @@ func (h *Helm) UpsertAiryConfigMap() error {
 		}, v1.CreateOptions{})
 	return err
 }
+
+func (h *Helm) cleanupJob() error {
+	jobsClient := h.clientset.BatchV1().Jobs(h.namespace)
+
+	deletionPolicy := v1.DeletePropagationBackground
+	return jobsClient.Delete(context.TODO(), h.name, v1.DeleteOptions{
+		PropagationPolicy: &deletionPolicy,
+	})
+}
