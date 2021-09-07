@@ -26,6 +26,7 @@ Now let's have a look at the different sections so you can make the changes you
 are looking for.
 
 // TODO Move this section to Helm
+
 ### Kubernetes
 
 - `appImageTag` the image tag of the container images for the **Airy Components**

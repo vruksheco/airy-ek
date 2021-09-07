@@ -1,7 +1,5 @@
 global:
   containerRegistry: ghcr.io/airyhq
-ingress:
-  host: "airy.core"
 config:
   kafka:
     brokers: "kafka-headless:9092"
