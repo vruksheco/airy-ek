@@ -78,7 +78,7 @@ func (p *provider) PostInstallation(providerConfig map[string]string, namespace 
 		}
 
 		return dir.UpdateAiryYaml(func(conf workspace.AiryConf) workspace.AiryConf {
-			conf.Kubernetes.Host = loadBalancerUrl
+			conf.Ingress.Host = loadBalancerUrl
 			return conf
 		})
 	}

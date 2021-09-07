@@ -2,13 +2,14 @@ security:
   allowedOrigins: '*'
   jwtSecret: {{ randAlphaNum 128 }}
 ingress:
-{{- if .Host }}
-  host: {{ default "airy.core" .Host }}
+{{- if .NgrokEnabled }}
+  ngrokEnabled: {{ .NgrokEnabled }}
 {{- end }}
-  ngrokEnabled: {{ default false .NgrokEnabled }}
-  https: {{ default false .Https}}
-{{- if .LetsencryptEmail }}
-  letsencryptEmail: {{ .LetsencryptEmail}}
+{{- if .Host }}
+  host: {{ .Host }}
+{{- end }}
+{{- if .Https }}
+  https: {{ .Https}}
 {{- end }}
   {{- if .LoadbalancerAnnotations }}
   loadbalancerAnnotations:

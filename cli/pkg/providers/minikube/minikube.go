@@ -35,7 +35,6 @@ func New(w io.Writer) *provider {
 func (p *provider) GetOverrides() template.Variables {
 	return template.Variables{
 		NgrokEnabled: true,
-		Host:         "airy.core",
 	}
 }
 
