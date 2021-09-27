@@ -21,6 +21,9 @@ custom_java_library(
         "@maven//:org_springframework_boot_spring_boot_autoconfigure",
         "@maven//:org_springframework_spring_web",
         "@maven//:org_springframework_spring_webmvc",
+        "@maven//:com_segment_analytics_java_analytics",
+        "@maven//:com_segment_analytics_java_analytics_core",
+        "@maven//:org_springframework_boot_spring_boot",
     ],
 )
 

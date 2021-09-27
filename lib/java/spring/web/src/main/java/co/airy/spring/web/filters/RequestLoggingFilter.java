@@ -3,8 +3,12 @@ package co.airy.spring.web.filters;
 
 import co.airy.log.AiryLoggerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.segment.analytics.Analytics;
+import com.segment.analytics.messages.TrackMessage;
 import org.apache.logging.log4j.ThreadContext;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.stereotype.Component;
@@ -31,6 +35,12 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
     private final ObjectMapper objectMapper;
     private final RequestLoggingIgnorePatterns requestLoggingIgnorePatterns;
 
+    @Value("${core.id")
+    private String coreId;
+
+    @Autowired(required = false)
+    private Analytics analytics;
+
     RequestLoggingFilter(ObjectMapper objectMapper, RequestLoggingIgnorePatterns requestLoggingIgnorePatterns) {
         this.objectMapper = objectMapper;
         this.requestLoggingIgnorePatterns = requestLoggingIgnorePatterns;
@@ -48,6 +58,14 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
         } finally {
             if ("POST".equals(requestToUse.getMethod())) {
                 log.info(createMessage(requestToUse));
+                if (analytics != null && requestToUse.getRequestURI().endsWith(".connect")) {
+                    analytics.enqueue(TrackMessage.builder("channel_connected")
+                            .userId(coreId)
+                            .properties(Map.ofEntries(Map.entry("source", requestToUse.getRequestURI().split("\\.")[1]))
+                            )
+                    );
+                }
+
             }
         }
     }
