@@ -53,7 +53,17 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: "{{ .Values.component }}"
-                  key: authToken
+                    key: authToken
+            - name: CORE_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: core-config
+                  key: CORE_ID
+            - name: TRACKING_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  name: core-config
+                  key: TRACKING_ENABLED
           livenessProbe:
             httpGet:
               path: /actuator/health
